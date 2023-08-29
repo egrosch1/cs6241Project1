@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -25,6 +26,10 @@ public class BabbleController {
 	@FXML 
 	private Button resetButton; 
 
+	@FXML
+	private TextField scoreTextField;
+
+	private int cumulativeScore;
 	private WordDictionary wordDictionary = new WordDictionary();
 	private TileBag tileBag;
 	private int currentIndex = 0;
@@ -33,6 +38,7 @@ public class BabbleController {
 
 	public BabbleController() {
 		this.tileBag = new TileBag();
+		this.cumulativeScore = 0;
 
 	}
 
@@ -75,9 +81,12 @@ public class BabbleController {
 			new Alert(AlertType.INFORMATION, "Not a valid word").showAndWait();
 			return;
 		}
-
-		tileRack.tiles().addAll(playedWord.tiles()); // Add the played word tiles to the tileRack
-		playedWord.tiles().clear(); // Clear the playedWord
+		 int wordScore = playedWord.getScore();
+		 cumulativeScore += wordScore;
+		 scoreTextField.setText(String.valueOf(cumulativeScore));
+		 
+		tileRack.tiles().addAll(playedWord.tiles());
+		playedWord.tiles().clear(); 
 
 		tilesChosenView.getItems().clear();
 		this.tilesListView.getItems().clear();
