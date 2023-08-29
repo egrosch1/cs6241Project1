@@ -27,7 +27,7 @@ public class BabbleController {
 	@FXML 
 	private Button resetButton; 
 
-	private WordDictionary wordDictionary;
+	private WordDictionary wordDictionary = new WordDictionary();
 	private TileBag tileBag;
 	private int currentIndex = 0;
 	private PlayedWord playedWord;
@@ -35,12 +35,11 @@ public class BabbleController {
 
 	public BabbleController() {
 		this.tileBag = new TileBag();
-		
+
 	}
 
 	public void initialize() {
 		tilesListView.setCellFactory(listView -> new TileListCell());
-
 		try {
 			for (int i = 0; i < 7; i++) {
 				tilesListView.getItems().add(tileBag.drawTile());
@@ -48,13 +47,13 @@ public class BabbleController {
 		} catch (EmptyTileBagException e) {
 			System.err.println("The tile bag is empty.");
 		}
-
 		tilesChosenView.setCellFactory(listView -> new ChosenTileListCell());
-
 		this.playWordBtn = new Button();
 		this.playedWord = new PlayedWord();
+		this.tileRack = new TileRack(); // Initialize the tileRack
 	}
-	
+
+
 	@FXML
 	public void handleResetButtonClicked(MouseEvent clickEvent) {
 		if (!this.playedWord.tiles().isEmpty()) {
@@ -64,21 +63,25 @@ public class BabbleController {
 		this.tilesChosenView.getItems().clear();
 
 	}
-	
-	@FXML 
-	public void handlePlayWordButtonClicked(MouseEvent clickEvent) {
-		for (int i = 0; i < this.tilesChosenView.getItems().size(); i++) {
-			this.playedWord.append(this.tilesChosenView.getItems().get(i));	
-		}
-		String hand = this.playedWord.getHand();
 
-		if (this.playedWord.tiles().isEmpty() || !this.wordDictionary.isValidWord(hand)) {
+	@FXML
+	public void handlePlayWordButtonClicked(MouseEvent clickEvent) {
+		for (Tile chosenTile : tilesChosenView.getItems()) {
+			playedWord.tiles().add(chosenTile);
+		}
+
+		String hand = playedWord.getHand();
+		if (playedWord.tiles().isEmpty() ||(wordDictionary != null && !wordDictionary.isValidWord(hand))) {
 			new Alert(AlertType.INFORMATION, "Not a valid word").showAndWait();
 			return;
 		}
 
-		this.playedWord.clear();
+		tileRack.tiles().addAll(playedWord.tiles()); // Add the played word tiles to the tileRack
+		playedWord.tiles().clear(); // Clear the playedWord
+
+		tilesChosenView.getItems().clear();
 	}
+
 	private class ChosenTileListCell extends ListCell<Tile> {
 		@Override
 		protected void updateItem (Tile item, boolean empty) {
@@ -103,10 +106,11 @@ public class BabbleController {
 			} else {
 				Label tileLabel = new Label(Character.toString(item.getLetter()));
 				setGraphic(tileLabel);
-				
+
 				setOnMouseClicked (event -> {
 					if (isSelected()) {
 						tilesChosenView.getItems().add(item);
+						tilesListView.getItems().remove(item);
 					}
 				});
 			}

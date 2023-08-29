@@ -24,9 +24,10 @@
 		<children>
 			<Button fx:id="resetButton" mnemonicParsing="false"
 				onMouseClicked="#handleResetButtonClicked" text="Reset" />
-			<Button alignment="TOP_RIGHT" contentDisplay="RIGHT"
-				mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT"
-				text="Play Word" />
+			<Button fx:id="playWordBtn" alignment="TOP_RIGHT"
+				contentDisplay="RIGHT" mnemonicParsing="false"
+				nodeOrientation="LEFT_TO_RIGHT"
+				onMouseClicked="#handlePlayWordButtonClicked" text="Play Word" />
 		</children>
 	</HBox>
 	<HBox prefHeight="38.0" prefWidth="400.0">
