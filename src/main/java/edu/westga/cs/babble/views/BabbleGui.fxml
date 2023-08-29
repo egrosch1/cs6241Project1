@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import edu.westga.cs.babble.controllers.BabbleController?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Pos?>
 
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs.babble.controllers.BabbleController">
-    <ListView fx:id="tilesListView" prefHeight="400" prefWidth="400"/>
+<VBox spacing = "10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs.babble.controllers.BabbleController">
+    <Label text="Tiles" />
+    <ListView fx:id="tilesListView" orientation="HORIZONTAL" maxHeight="40" prefWidth="40" />    
+        <HBox spacing="5">
+    
+    </HBox>
 </VBox>
