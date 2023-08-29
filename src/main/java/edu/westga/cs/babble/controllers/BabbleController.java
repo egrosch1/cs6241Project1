@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -15,6 +16,9 @@ import edu.westga.cs.babble.model.TileRack;
 import edu.westga.cs.babble.model.EmptyTileBagException;
 import edu.westga.cs.babble.model.PlayedWord;
 
+/**
+ * 
+ */
 public class BabbleController {
 
 	@FXML
@@ -32,7 +36,6 @@ public class BabbleController {
 	private int cumulativeScore;
 	private WordDictionary wordDictionary = new WordDictionary();
 	private TileBag tileBag;
-	private int currentIndex = 0;
 	private PlayedWord playedWord;
 	private TileRack tileRack;
 
@@ -42,6 +45,20 @@ public class BabbleController {
 
 	}
 
+	  private void setupTooltips() {
+	        Tooltip tilesListViewTooltip = new Tooltip("Available tiles to form words.");
+	        tilesListView.setTooltip(tilesListViewTooltip);
+
+	        Tooltip scoreTextFieldTooltip = new Tooltip("Cumulative score of played words.");
+	        scoreTextField.setTooltip(scoreTextFieldTooltip);
+
+	        Tooltip resetButtonTooltip = new Tooltip("Clears selected tiles and resets the game.");
+	        resetButton.setTooltip(resetButtonTooltip);
+
+	        Tooltip playWordButtonTooltip = new Tooltip("Submit the selected tiles as a word.");
+	        playWordBtn.setTooltip(playWordButtonTooltip);
+	  }
+	  
 	public void initialize() {
 		tilesListView.setCellFactory(listView -> new TileListCell());
 		try {
@@ -54,7 +71,9 @@ public class BabbleController {
 		tilesChosenView.setCellFactory(listView -> new ChosenTileListCell());
 		this.playWordBtn = new Button();
 		this.playedWord = new PlayedWord();
-		this.tileRack = new TileRack(); // Initialize the tileRack
+		this.tileRack = new TileRack();
+		scoreTextField.setEditable(false);
+		setupTooltips();
 	}
 
 
