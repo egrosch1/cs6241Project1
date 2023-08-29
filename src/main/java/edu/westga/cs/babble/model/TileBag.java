@@ -25,8 +25,7 @@ public class TileBag {
 	/**
 	 * Brute-force fills the bag with a set of tiles with the Scrabble points and letter distribution (ignoring the blank tiles)
 	 */
-	private void populateWithScrabbleTiles()
-	{
+	private void populateWithScrabbleTiles() {
 		// 1-pt tiles: E, A, I, O, N, R, T, L, S, U
 		for(int i=0; i<12; i++) tiles.add(new Tile('E'));
 		for(int i=0; i< 9; i++) tiles.add(new Tile('A'));

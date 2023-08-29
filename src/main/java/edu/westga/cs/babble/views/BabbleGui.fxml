@@ -10,23 +10,32 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox spacing="10" xmlns="http://javafx.com/javafx/20.0.1"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="edu.westga.cs.babble.controllers.BabbleController">
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="edu.westga.cs.babble.controllers.BabbleController">
 
-    <Label text="Tiles" />
-    <ListView fx:id="tilesListView" maxHeight="40" orientation="HORIZONTAL" prefWidth="400" />
-    <Label text="Your Word" />
-    <ListView fx:id="tilesChosenView" maxHeight="40" orientation="HORIZONTAL" prefWidth="400 " />
+	<Label text="Tiles" />
+	<ListView fx:id="tilesListView" maxHeight="40"
+		orientation="HORIZONTAL" prefWidth="400" />
+	<Label text="Your Word" />
+	<ListView fx:id="tilesChosenView" maxHeight="40"
+		orientation="HORIZONTAL" prefWidth="400 " />
 
-    <HBox depthTest="DISABLE" prefHeight="54.0" prefWidth="400.0">
-        <Region HBox.hgrow="ALWAYS" />
-        <Button fx:id="resetButton" mnemonicParsing="false" onMouseClicked="#handleResetButtonClicked" text="Reset" />
-        <Button fx:id="playWordBtn" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#handlePlayWordButtonClicked" text="Play Word" />
-    </HBox>
+	<HBox spacing="5">
+		<!-- Empty HBox to create spacing -->
+	</HBox>
 
-    <HBox prefHeight="38.0" prefWidth="400.0">
-        <Region HBox.hgrow="ALWAYS" />
-        <Label text="Score:" />
-        <TextField fx:id="scoreTextField" />
-    </HBox>
+	<HBox depthTest="DISABLE" prefHeight="54.0" prefWidth="400.0">
+		<Region HBox.hgrow="ALWAYS" />
+		<Button fx:id="resetButton" mnemonicParsing="false"
+			onMouseClicked="#handleResetButtonClicked" text="Reset" />
+		<Button fx:id="playWordBtn" contentDisplay="RIGHT"
+			mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT"
+			onMouseClicked="#handlePlayWordButtonClicked" text="Play Word" />
+	</HBox>
+
+	<HBox prefHeight="38.0" prefWidth="400.0">
+		<Region HBox.hgrow="ALWAYS" />
+		<Label text="Score:" />
+		<TextField fx:id="scoreTextField" />
+	</HBox>
 </VBox>
