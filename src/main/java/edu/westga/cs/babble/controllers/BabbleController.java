@@ -61,6 +61,8 @@ public class BabbleController {
 			this.playedWord.clear();
 		} 
 		this.tilesChosenView.getItems().clear();
+		this.tilesListView.getItems().clear();
+		this.initialize();
 
 	}
 
@@ -80,6 +82,8 @@ public class BabbleController {
 		playedWord.tiles().clear(); // Clear the playedWord
 
 		tilesChosenView.getItems().clear();
+		this.tilesListView.getItems().clear();
+		this.initialize();
 	}
 
 	private class ChosenTileListCell extends ListCell<Tile> {
