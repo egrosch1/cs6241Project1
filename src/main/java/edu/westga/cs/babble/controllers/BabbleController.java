@@ -17,7 +17,9 @@ import edu.westga.cs.babble.model.EmptyTileBagException;
 import edu.westga.cs.babble.model.PlayedWord;
 
 /**
- * 
+ * Controller class for the Word Game Babble
+ * @author egrosch1
+ * @version Fall 2023
  */
 public class BabbleController {
 
@@ -39,26 +41,35 @@ public class BabbleController {
 	private PlayedWord playedWord;
 	private TileRack tileRack;
 
+	/**
+	 * Controller for the Babble game. Creates a tile bag and a cumulative score.
+	 */
 	public BabbleController() {
 		this.tileBag = new TileBag();
 		this.cumulativeScore = 0;
 
 	}
 
-	  private void setupTooltips() {
-	        Tooltip tilesListViewTooltip = new Tooltip("Available tiles to form words.");
-	        tilesListView.setTooltip(tilesListViewTooltip);
+	/**
+	 * Method to create Accessibility features for Babble.
+	 */
+	private void setupTooltips() {
+		Tooltip tilesListViewTooltip = new Tooltip("Available tiles to form words.");
+		tilesListView.setTooltip(tilesListViewTooltip);
 
-	        Tooltip scoreTextFieldTooltip = new Tooltip("Cumulative score of played words.");
-	        scoreTextField.setTooltip(scoreTextFieldTooltip);
+		Tooltip scoreTextFieldTooltip = new Tooltip("Cumulative score of played words.");
+		scoreTextField.setTooltip(scoreTextFieldTooltip);
 
-	        Tooltip resetButtonTooltip = new Tooltip("Clears selected tiles and resets the game.");
-	        resetButton.setTooltip(resetButtonTooltip);
+		Tooltip resetButtonTooltip = new Tooltip("Clears selected tiles and resets the game.");
+		resetButton.setTooltip(resetButtonTooltip);
 
-	        Tooltip playWordButtonTooltip = new Tooltip("Submit the selected tiles as a word.");
-	        playWordBtn.setTooltip(playWordButtonTooltip);
-	  }
-	  
+		Tooltip playWordButtonTooltip = new Tooltip("Submit the selected tiles as a word.");
+		playWordBtn.setTooltip(playWordButtonTooltip);
+	}
+
+	/**
+	 * Method to initialize the game
+	 */
 	public void initialize() {
 		tilesListView.setCellFactory(listView -> new TileListCell());
 		try {
@@ -77,6 +88,10 @@ public class BabbleController {
 	}
 
 
+	/**
+	 * Method that allows the letters to reset when the mouse clicks the button "Reset"
+	 * @param clickEvent when button is pressed
+	 */
 	@FXML
 	public void handleResetButtonClicked(MouseEvent clickEvent) {
 		if (!this.playedWord.tiles().isEmpty()) {
@@ -89,6 +104,10 @@ public class BabbleController {
 
 	}
 
+	/**
+	 * Method that allows the word to be played with button is clicked
+	 * @param clickEvent when button is pressed
+	 */
 	@FXML
 	public void handlePlayWordButtonClicked(MouseEvent clickEvent) {
 		for (Tile chosenTile : tilesChosenView.getItems()) {
@@ -100,10 +119,10 @@ public class BabbleController {
 			new Alert(AlertType.INFORMATION, "Not a valid word").showAndWait();
 			return;
 		}
-		 int wordScore = playedWord.getScore();
-		 cumulativeScore += wordScore;
-		 scoreTextField.setText(String.valueOf(cumulativeScore));
-		 
+		int wordScore = playedWord.getScore();
+		cumulativeScore += wordScore;
+		scoreTextField.setText(String.valueOf(cumulativeScore));
+
 		tileRack.tiles().addAll(playedWord.tiles());
 		playedWord.tiles().clear(); 
 
@@ -112,6 +131,9 @@ public class BabbleController {
 		this.initialize();
 	}
 
+	/**
+	 * Method to show letters chosen
+	 */
 	private class ChosenTileListCell extends ListCell<Tile> {
 		@Override
 		protected void updateItem (Tile item, boolean empty) {
@@ -126,6 +148,9 @@ public class BabbleController {
 		}
 	}
 
+	/**
+	 * Method to show tiles pulled from a bag.
+	 */
 	private class TileListCell extends ListCell<Tile> {
 		@Override
 		protected void updateItem(Tile item, boolean empty) {

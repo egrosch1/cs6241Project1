@@ -18,10 +18,6 @@
     <Label text="Your Word" />
     <ListView fx:id="tilesChosenView" maxHeight="40" orientation="HORIZONTAL" prefWidth="400 " />
 
-    <HBox spacing="5">
-        <!-- Empty HBox to create spacing -->
-    </HBox>
-
     <HBox depthTest="DISABLE" prefHeight="54.0" prefWidth="400.0">
         <Region HBox.hgrow="ALWAYS" />
         <Button fx:id="resetButton" mnemonicParsing="false" onMouseClicked="#handleResetButtonClicked" text="Reset" />
